@@ -38,10 +38,10 @@ def process_data(data):
         if item_revenue > max_revenue["revenue"]:
             item["revenue"] = item_revenue
             max_revenue = item
-        # TODO: also handle max sales
+
         if item["total_sales"] > sales["total_sales"]:
             sales = item
-        # TODO: also handle most popular car_year
+
         if not item["car"]["car_year"] in best_car.keys():
             best_car[item["car"]["car_year"]] = item["total_sales"]
         else:
@@ -75,9 +75,7 @@ def main(argv):
     summary = process_data(data)
     new_summary = ''.join(summary)
     print(summary)
-    # TODO: turn this into a PDF report
     report('/tmp/cars.pdf', "Cars report", new_summary, cars_dict_to_table(data))
-    # TODO: send the PDF report as an email attachment
     msg = email_generate("automation@example.com", "USERNAME@example.com",
                          "Sales summary for last month", new_summary, "/tmp/cars.pdf")
     email_send(msg)
